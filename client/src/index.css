@@ -30,12 +30,12 @@ body{font-size: 16px; font-family:var(--ff);}
 /* utility class */
 
 .container{
-    max-width: 1200px;
+    max-width: 1300px;
     margin: auto;
     padding: 0 1rem;
 }
 
-.row{display: flex; flex-flow: row wrap; margin: 0 -1rem;}
+.row{display: flex; flex-flow: row wrap; margin: 0 -1rem; margin-left: 10rem;}
 [class^="col"]{flex: 1 0 auto; padding: 0 1rem;}
 
 .col-1{ flex-basis:8.33%; max-width: 8.33%;}
@@ -55,6 +55,14 @@ body{font-size: 16px; font-family:var(--ff);}
 .justify-space-bet{ justify-content: space-between;}
 .justify-center{ justify-content: center;}
 .align-center{ align-items: center;}
+
+
+/* aside */
+.aside{width: 10rem; height: 100vh; border: 1px solid #989998; position: fixed;}
+.aside h2{font-size: 24px; padding: 5px; padding-top: 20px;}
+.aside ul{padding: 20px;}
+.aside ul li{ padding: 5px 10px; border: 1px solid #656363; border-radius: 5px; margin-bottom: 10px;}
+.aside ul li:active{background: #201f1f; color: #fff;}
 
 /* bar chart */
 
@@ -80,7 +88,7 @@ h2{
 
 .end-year ul{
     position: absolute;
-    top: 30px;
+    top: 40px;
     left: 0;
     right: 0;
     background: #8d8989;

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-chartjs-2";
 
-import dataSets from "../utils/dataSets.jsx";
+import createChartData from "../utils/createChartData.jsx";
 
-function Charts({ data, chartType }) {
+function Charts({ dataset, filteredYears, chartType }) {
   const [years, setYears] = useState([]);
-  const[fixedYears, setFixedYears] = useState([]);
-  const [dataset, setDataset] = useState({});
   const [flag, setFlag] = useState(true);
+
 
 
   const handleClick = (e) => {
     setFlag((prevFlag) => !prevFlag);
     if(e.target.innerText == 'All'){
-     setYears((prevFilteredYears) =>fixedYears.filter((year) => year !== "All"));
+     setYears((prevFilteredYears) =>filteredYears);
       return;
     }
     const clickedYear = parseInt(e.target.innerText);
@@ -23,60 +22,24 @@ function Charts({ data, chartType }) {
   };
 
 
-  useEffect(() => {
-    const yearAndData = dataSets(data);
-    setYears(yearAndData.filteredYear);
-    setDataset(yearAndData.datasetObj);
-    setFixedYears([...yearAndData.filteredYear,"All"]);
-  }, []);
+  const chartData = createChartData(dataset,years.length>0?years:filteredYears)
 
-  // Prepare data for visualization
-  const chartData = {
-    labels: years,
-    datasets: [
-      {
-        label: "Intensity",
-        backgroundColor: "#48249c7f",
-        borderColor: "#6c794a",
-        borderWidth: 1,
-        data: years?.map(
-          (year) =>
-            dataset.intensity[year].sum / dataset.intensity[year].arr.length
-        ),
-      },
-      {
-        label: "Likelihood",
-        backgroundColor: "#fb17a07e",
-        borderColor: "#6c794a",
-        borderWidth: 1,
-        data: years?.map(
-          (year) =>
-            dataset.likelihood[year].sum / dataset.likelihood[year].arr.length
-        ),
-      },
-      {
-        label: "Relevance",
-        backgroundColor: "#1c5f117e",
-        borderColor: "#6c794a",
-        borderWidth: 1,
-        data: years.map(
-          (year) =>
-            dataset?.relevance[year].sum / dataset.relevance[year].arr.length
-        ),
-      },
-    ],
-  };
-
+  
   return (
     <div>
       <h2>Data Visualization BarChart</h2>
       <div onClick={(e)=>handleClick(e)} className="end-year">
         <h3>Select End Year</h3>
         <ul className={`flex ${flag && "display-n"}`}>
-          {fixedYears.length>1 && fixedYears.map((year,i)=> <li key={i}>{year}</li>)}
+          <li>All</li>
+          {filteredYears?.map((year,i)=> <li key={i}>{year}</li>)}
         </ul>
       </div>
-      <Chart type={chartType} data={chartData} />
+      {
+        chartData == null ? <h3>Chart loading...</h3>
+        :<Chart type={chartType} data={chartData} />
+      }
+      
     </div>
   );
 }
