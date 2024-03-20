@@ -1,0 +1,97 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+*, ::after, ::before{ margin: 0; box-sizing: border-box;}
+
+/* html tags reset */
+a{text-decoration: none;}
+button{cursor: pointer; padding: 0;}
+ul{list-style: none; padding: 0;}
+label{display: block;}
+img{vertical-align: bottom;}
+span{margin-right: 5px;}
+
+
+
+html{
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    font-size: 15px;
+    --ff: "Montserrat", sans-serif;
+    --ffl:"Lato", sans-serif;;
+    --yellow:#dbc821;
+    --sky-blue:#00a4ff;
+}
+
+body{font-size: 16px; font-family:var(--ff);}
+
+
+/* utility class */
+
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1rem;
+}
+
+.row{display: flex; flex-flow: row wrap; margin: 0 -1rem;}
+[class^="col"]{flex: 1 0 auto; padding: 0 1rem;}
+
+.col-1{ flex-basis:8.33%; max-width: 8.33%;}
+.col-2{ flex-basis:16.66%; max-width: 16.66%;}
+.col-3{ flex-basis:25%; max-width: 25%;}
+.col-4{ flex-basis:33.33%; max-width: 33.33%;}
+.col-5{ flex-basis:41.66%; max-width: 41.66%;}
+.col-6{ flex-basis:50%; max-width: 50%;}
+.col-7{ flex-basis:58.33%; max-width: 58.33%;}
+.col-8{ flex-basis:66.66%; max-width: 66.66%;}
+.col-9{ flex-basis:75%; max-width: 75%;}
+.col-10{ flex-basis:83.33%; max-width: 83.33%;}
+.col-11{ flex-basis:91.66%; max-width: 91.66%;}
+.col-12{ flex-basis:100%; max-width: 100%;}
+
+.flex{ display: flex; }
+.justify-space-bet{ justify-content: space-between;}
+.justify-center{ justify-content: center;}
+.align-center{ align-items: center;}
+
+/* bar chart */
+
+h2{
+    font-size: 2rem;
+    padding: 20px 0;
+}
+
+.end-year .display-n{
+    display: none;
+}
+
+.end-year{position: relative;}
+
+.end-year h3{
+    padding: 5px 10px;
+    border: 2px solid #2d47cb;
+    border-radius: 10px;
+    color: rgb(6, 6, 26);
+    background: #ecf5f5;
+    text-transform: uppercase;
+}
+
+.end-year ul{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    background: #8d8989;
+    color: #eee4e4;
+    padding: 20px;
+    flex-flow: row wrap;
+}
+.end-year ul li{
+    padding: 5px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 5px;
+}
