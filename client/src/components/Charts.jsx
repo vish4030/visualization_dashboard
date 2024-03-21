@@ -3,42 +3,46 @@ import { Chart } from "react-chartjs-2";
 
 import createChartData from "../utils/createChartData.jsx";
 
-function Charts({ dataset, filteredYears, chartType }) {
-  const [years, setYears] = useState([]);
+function Charts({ dataset, filteredTopic, chartType, dataTopic }) {
+  const [topics, setTopics] = useState([]);
   const [flag, setFlag] = useState(true);
-
-
+  const [chartData, setChartData] = useState(null);
 
   const handleClick = (e) => {
     setFlag((prevFlag) => !prevFlag);
     if(e.target.innerText == 'All'){
-     setYears((prevFilteredYears) =>filteredYears);
+     setTopics((prev) =>filteredTopic);
       return;
     }
-    const clickedYear = parseInt(e.target.innerText);
-    if (!isNaN(clickedYear)){
-      setYears([clickedYear])
-    };
+    let clicked = e.target.innerText;
+      if(clicked !== `SELECT ${dataTopic.toUpperCase()}`)
+      {
+        setTopics([clicked]);
+      }
+      
   };
 
+  useEffect(()=>{
+    console.log("run")
+    if(topics.length>0)
+      setChartData((prev)=>createChartData(dataset,topics));
+    else
+      setChartData((prev)=>createChartData(dataset,filteredTopic));
+  },[topics, dataset, filteredTopic])
 
-  const chartData = createChartData(dataset,years.length>0?years:filteredYears)
-
-  
   return (
+    chartData == null ? <h3>Loading...</h3>
+    :
     <div>
-      <h2>Data Visualization BarChart</h2>
+      <h2>Data Visualization {chartType.toUpperCase()} CHART</h2>
       <div onClick={(e)=>handleClick(e)} className="end-year">
-        <h3>Select End Year</h3>
+        <h3>Select {dataTopic}</h3>
         <ul className={`flex ${flag && "display-n"}`}>
           <li>All</li>
-          {filteredYears?.map((year,i)=> <li key={i}>{year}</li>)}
+          {filteredTopic?.map((year,i)=> <li key={i}>{year}</li>)}
         </ul>
       </div>
-      {
-        chartData == null ? <h3>Chart loading...</h3>
-        :<Chart type={chartType} data={chartData} />
-      }
+      <Chart type={chartType} data={chartData} />
       
     </div>
   );

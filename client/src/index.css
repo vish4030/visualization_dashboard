@@ -55,6 +55,7 @@ body{font-size: 16px; font-family:var(--ff);}
 .justify-space-bet{ justify-content: space-between;}
 .justify-center{ justify-content: center;}
 .align-center{ align-items: center;}
+.display-n{display: none;}
 
 
 /* aside */

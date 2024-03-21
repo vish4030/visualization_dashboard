@@ -1,16 +1,16 @@
 
 
-export default function createChartData(dataset, years) {
-
+export default function createChartData(dataset, topic) {
+  //console.log(topic,"topic");
   const chartData = {
-    labels: years,
+    labels: topic,
     datasets: [
       {
         label: "Intensity",
         backgroundColor: "#48249c7f",
         borderColor: "#6c794a",
         borderWidth: 1,
-        data: years?.map(
+        data: topic?.map(
           (year) =>
             dataset.intensity[year].sum / dataset.intensity[year].arr.length
         ),
@@ -20,7 +20,7 @@ export default function createChartData(dataset, years) {
         backgroundColor: "#fb17a07e",
         borderColor: "#6c794a",
         borderWidth: 1,
-        data: years?.map(
+        data: topic?.map(
           (year) =>
             dataset.likelihood[year].sum / dataset.likelihood[year].arr.length
         ),
@@ -30,7 +30,7 @@ export default function createChartData(dataset, years) {
         backgroundColor: "#1c5f117e",
         borderColor: "#6c794a",
         borderWidth: 1,
-        data: years.map(
+        data: topic.map(
           (year) =>
             dataset?.relevance[year].sum / dataset.relevance[year].arr.length
         ),
